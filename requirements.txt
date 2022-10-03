@@ -1,0 +1,5 @@
+django==3.2.15
+pandas==1.5.0
+openpyxl==3.0.10
+django-simpleui==2022.6.131
+rsa==4.9

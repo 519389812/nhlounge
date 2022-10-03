@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% include "head.html" %}
+        <title>结果</title>
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mb-5">
+                                <h1 class="fw-bolder"><img style="width: 9%" src="{% static 'assets/success.png'%}"/>结果 Result</h1>
+                                <p class="lead fw-normal text-muted mb-0">{{ msg_cn }}</p>
+                                <p class="lead fw-normal text-muted mb-0">{{ msg_en }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Bootstrap core JavaScript -->
+        {% include "script.html" %}
+    </body>
+</html>

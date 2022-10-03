@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% include "head.html" %}
+        <title>行程登记主页</title>
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            {% include "navigation.html" %}
+            <div class="container px-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xxl-6">
+                        <div class="text-center my-5">
+                            <h1 class="fw-bolder mb-3">行程登记</h1>
+                            <p class="lead fw-normal text-muted mb-4">数据仅用于行程登记与模板生成<br/>请于每日工作结束后<strong>清除</strong>当天数据<br/>请<strong>勿</strong>发布此页面</p>
+                            <a class="btn btn-primary btn-lg" href="{% url 'export_pax' %}">开始生成</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Content-->
+<!--            <section class="py-5">-->
+<!--                <div class="container px-5">-->
+<!--                    <h1 class="fw-bolder fs-5 mb-4"></h1>-->
+<!--                    <div class="card border-0 shadow rounded-3 overflow-hidden">-->
+<!--                        <div class="card-body p-0">-->
+<!--                            <div class="row gx-0">-->
+<!--                                <div class="col-lg-6 col-xl-5 py-lg-5">-->
+<!--                                    <div class="p-4 p-md-5">-->
+<!--                                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>-->
+<!--                                        <div class="h2 fw-bolder">行程登记</div>-->
+<!--                                        <p>添加旅客预报信息上传、比对功能</p>-->
+<!--                                        <a class="stretched-link text-decoration-none" href="/admin">-->
+<!--                                            进入后台-->
+<!--                                            <i class="bi bi-arrow-right"></i>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                                <div class="col-lg-6 col-xl-7"><div class="bg-featured-blog" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0914%252F2ec4d508j00qzduvz000kd200fc007bg00fc007b.jpg%26thumbnail%3D660x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643251457&t=34227c56103343026c721ef8bc072f23')"></div></div>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+
+        </main>
+        <!-- Footer-->
+        {% include "footer.html" %}
+        {% include "script.html" %}
+    </body>
+</html>

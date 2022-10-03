@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include "head.html" %}
+    <title>券码兑换</title>
+</head>
+
+<body class="d-flex flex-column">
+    <main class="flex-shrink-0">
+
+        <!-- Page content-->
+        <section class="py-5">
+            <div class="container px-5">
+                <!-- Contact form-->
+                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class="text-center mb-5">
+                        <h1 class="fw-bolder"></h1>
+                        <p class="lead fw-normal text-muted mb-0">请输入券码：</p>
+                    </div>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- * * SB Forms Contact Form * *-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- This form is pre-integrated with SB Forms.-->
+                            <!-- To make this form functional, sign up at-->
+                            <!-- https://startbootstrap.com/solution/contact-forms-->
+                            <!-- to get an API token!-->
+                            <form data-sb-form-api-token="API_TOKEN" action="{% url 'verification:verify' %}" method="post">
+                                {% csrf_token %}
+                                <!-- Name input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="coupon" name="coupon" type="text" placeholder="请输入券码" value="{{ coupon }}" required/>
+                                    <label for="coupon" style="font-size: 14px">券码：</label>
+                                    <div class="invalid-feedback" id="coupon-invalid-feedback"></div>
+                                </div>
+                                <!-- Submit Button-->
+                                <div align="center" style="color: red">{{ msg_cn }}</div>
+                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">兑换</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+<!-- Bootstrap core JavaScript -->
+{% include "script.html" %}
+
+</body>
+</html>
