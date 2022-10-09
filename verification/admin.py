@@ -62,12 +62,15 @@ class CouponAdmin(AjaxAdmin):
 
     def export_directly(self, request, queryset):
         outfile = BytesIO()
-        data = pd.DataFrame(queryset.values())
+        data = pd.DataFrame(
+            queryset.values('id', 'customer_id', 'coupon_type', 'coupon', 'signature', 'version', 'created_datetime',
+                            'valid_from_datetime', 'expiry_datetime', 'status', 'uploaded_user__username',
+                            'uploaded_datetime', 'updated_user__username', 'updated_datetime'))
         data = data.rename(columns={'id': '序号', 'customer_id': '客户id', 'coupon_type': '券码类型', 'coupon': '券码',
                                     'signature': '校验码', 'version': '密钥版本', 'created_datetime': '创建时间',
                                     'valid_from_datetime': '生效时间', 'expiry_datetime': '过期时间', 'status': '状态',
-                                    'uploaded_user': '上传用户', 'uploaded_datetime': '上传时间',
-                                    'updated_user': '最后更新用户', 'updated_datetime': '最后更新时间'})
+                                    'uploaded_user__username': '上传用户', 'uploaded_datetime': '上传时间',
+                                    'updated_user__username': '最后更新用户', 'updated_datetime': '最后更新时间'})
         data['创建时间'] = (data['创建时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['生效时间'] = (data['生效时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['过期时间'] = (data['过期时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
