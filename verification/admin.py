@@ -69,9 +69,10 @@ class CouponAdmin(AjaxAdmin):
                                     'uploaded_user': '上传用户', 'uploaded_datetime': '上传时间',
                                     'updated_user': '最后更新用户', 'updated_datetime': '最后更新时间'})
         data['创建时间'] = (data['创建时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
+        data['生效时间'] = (data['生效时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['过期时间'] = (data['过期时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['上传时间'] = (data['上传时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
-        data['最新更新时间'] = (data['最新更新时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
+        data['最后更新时间'] = (data['最后更新时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data = data.sort_values(by=['id'], ascending=True)
         data = data.fillna('')
         filename = 'Coupon_' + datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S') + '.xlsx'
