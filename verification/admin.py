@@ -28,8 +28,8 @@ class CouponAdmin(AjaxAdmin):
         ('状态', {'fields': ('status', 'is_valid')}),
         ('操作', {'fields': ('uploaded_user', 'uploaded_datetime', 'updated_user', 'updated_datetime')}),
     )
-    list_display = ('id', 'customer_id', 'coupon_type', 'coupon', 'valid_from_datetime', 'expiry_datetime', 'status',
-                    'is_valid')
+    list_display = ('id', 'customer_id', 'coupon_type', 'coupon', 'version', 'valid_from_datetime', 'expiry_datetime',
+                    'status', 'is_valid')
     list_editable = ('status', )
     readonly_fields = ('id', 'customer_id', 'coupon_type', 'coupon', 'signature', 'version', 'created_datetime',
                        'valid_from_datetime', 'expiry_datetime', 'is_valid', 'uploaded_user', 'uploaded_datetime',
@@ -138,14 +138,14 @@ class CouponAdmin(AjaxAdmin):
                 return JsonResponse(data={"status": "error", "msg": "文件名称或格式错误"})
             if file.size > 2000:
                 return JsonResponse(data={"status": "error", "msg": "文件过大"})
-            try:
-                with open(os.path.join(KEY_DIR, file.name), 'wb') as f:
-                    # for chunk in file.chunks():
-                    #     f.write(chunk)
-                    f.write(file.read())
-            except:
-                return JsonResponse(data={"status": "error", "msg": "写入文件失败"})
-            return JsonResponse(data={"status": "success", "msg": "导入成功"})
+            # try:
+            with open(os.path.join(KEY_DIR, file.name), 'wb') as f:
+                # for chunk in file.chunks():
+                #     f.write(chunk)
+                f.write(file.read())
+        # except:
+            return JsonResponse(data={"status": "error", "msg": "写入文件失败"})
+            # return JsonResponse(data={"status": "success", "msg": "导入成功"})
     upload_key.short_description = '上传密钥'
     upload_key.type = "warning"
     upload_key.layer = {
