@@ -77,7 +77,7 @@ class CouponAdmin(AjaxAdmin):
         data = data.fillna('')
         filename = 'Coupon_' + datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S') + '.xlsx'
         response = HttpResponse(content_type='application/vnd.ms-excel')
-        response['Content-Disposition'] = "attachment;filename='{}'".format(filename)
+        response['Content-Disposition'] = "attachment;filename={}".format(filename)
         data.to_excel(outfile, index=False)
         response.write(outfile.getvalue())
         return response
