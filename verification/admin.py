@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from simpleui.admin import AjaxAdmin
 from pytz import timezone as pytz_timezone
-from CouponVerifier.settings import TIME_ZONE, KEY_DIR
+from CouponVerifier.settings import TIME_ZONE, KEY_DIR, BASE_DIR
 from django.utils.html import format_html
 
 
@@ -138,14 +138,14 @@ class CouponAdmin(AjaxAdmin):
                 return JsonResponse(data={"status": "error", "msg": "文件名称或格式错误"})
             if file.size > 2000:
                 return JsonResponse(data={"status": "error", "msg": "文件过大"})
-            # try:
-            with open(os.path.join(KEY_DIR, file.name), 'wb') as f:
-                # for chunk in file.chunks():
-                #     f.write(chunk)
-                f.write(file.read())
-        # except:
-            return JsonResponse(data={"status": "error", "msg": "写入文件失败"})
-            # return JsonResponse(data={"status": "success", "msg": "导入成功"})
+            try:
+                with open(os.path.join(BASE_DIR, KEY_DIR, file.name), 'wb') as f:
+                    # for chunk in file.chunks():
+                    #     f.write(chunk)
+                    f.write(file.read())
+            except:
+                return JsonResponse(data={"status": "error", "msg": "写入文件失败"})
+            return JsonResponse(data={"status": "success", "msg": "导入成功"})
     upload_key.short_description = '上传密钥'
     upload_key.type = "warning"
     upload_key.layer = {
