@@ -73,7 +73,7 @@ class CouponAdmin(AjaxAdmin):
         data['过期时间'] = (data['过期时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['上传时间'] = (data['上传时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
         data['最后更新时间'] = (data['最后更新时间'] + datetime.timedelta(hours=8)).dt.strftime('%Y-%m-%d %H:%M:%S')
-        data = data.sort_values(by=['id'], ascending=True)
+        data = data.sort_values(by=['序号'], ascending=True)
         data = data.fillna('')
         filename = 'Coupon_' + datetime.datetime.now().strftime('%Y-%m-%d_%H%M%S') + '.xlsx'
         response = HttpResponse(content_type='application/vnd.ms-excel')
