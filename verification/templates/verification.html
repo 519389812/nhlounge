@@ -36,6 +36,7 @@
                                     <div class="invalid-feedback" id="coupon-invalid-feedback"></div>
                                 </div>
                                 <!-- Submit Button-->
+                                <div id="liveAlertPlaceholder"></div>
                                 <div align="center" style="color: red">{{ msg_cn }}</div>
                                 <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">兑换</button></div>
                             </form>
@@ -48,6 +49,22 @@
     </main>
 <!-- Bootstrap core JavaScript -->
 {% include "script.html" %}
+{% if messages %}
+    <script>
+        var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        function alertMessage(message, type) {
+            var wrapper = document.createElement('div')
+            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+            alertPlaceholder.append(wrapper)
+        }
 
+        {% for msg in messages %}
+            alertMessage('{{ msg.message }}', '{{ msg.tags }}')
+            window.setTimeout(function(){
+                $('.alert').empty().removeClass();
+            }, 3000)
+        {% endfor %}
+    </script>
+{% endif %}
 </body>
 </html>

@@ -1,9 +1,10 @@
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from verification.models import Coupon
 from pytz import timezone
 from CouponVerifier.settings import TIME_ZONE
 from CouponVerifier.rsa_handler import RsaHandler
+from django.contrib import messages
 
 
 time_zone = timezone(TIME_ZONE)
@@ -36,7 +37,8 @@ def verify(request):
             if coupon.status == "未使用":
                 coupon.status = "已使用"
                 coupon.save()
-                return render(request, "done.html", {"msg_cn": "兑换成功！"})
+                messages.success(request, '恭喜，兑换成功！')
+                return redirect(reverse('verification:home'))
             else:
                 return render(request, "verification.html", {"msg_cn": "兑换失败！券码不可用，状态为：%s" % coupon.status, "coupon": coupon_code})
         else:
