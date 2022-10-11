@@ -79,7 +79,7 @@ MIDDLEWARE = [
 ]
 
 
-SESSION_COOKIE_AGE = 600  # Session的cookie失效时间（秒）
+SESSION_COOKIE_AGE = 3600  # Session的cookie失效时间（秒）
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 是否关闭浏览器使Session过期
 SESSION_SAVE_EVERY_REQUEST = True  # 是否每次请求都保存Session
 

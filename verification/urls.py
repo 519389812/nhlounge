@@ -6,5 +6,7 @@ app_name = "verification"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("verify/", views.verify, name="verify")
+    path("login/", views.login, name="login"),
+    path("logout/", views.logout, name="logout"),
+    path("verify/", views.verify, name="verify"),
 ]
