@@ -29,7 +29,7 @@ class CouponAdmin(AjaxAdmin):
         ('操作', {'fields': ('uploaded_user', 'uploaded_datetime', 'updated_user', 'updated_datetime')}),
     )
     list_display = ('id', 'customer_id', 'coupon_type', 'coupon', 'version', 'valid_from_datetime', 'expiry_datetime',
-                    'status', 'is_valid')
+                    'status', 'is_valid', 'updated_user', 'updated_datetime')
     list_editable = ('status', )
     readonly_fields = ('id', 'customer_id', 'coupon_type', 'coupon', 'signature', 'version', 'created_datetime',
                        'valid_from_datetime', 'expiry_datetime', 'is_valid', 'uploaded_user', 'uploaded_datetime',
@@ -115,8 +115,9 @@ class CouponAdmin(AjaxAdmin):
                                           valid_from_datetime=r['生效时间'], expiry_datetime=r['过期时间'],
                                           status=r['状态'], uploaded_user=request.user, updated_user=request.user)
                 except:
-                    missed.append(str(i))
-                    return JsonResponse(data={"status": "error", "msg": "序号" + ','.join(missed) + '上传失败'})
+                    missed.append(r['券码'])
+            if missed:
+                return JsonResponse(data={"status": "error", "msg": "序号: " + ','.join(missed) + ' 上传失败'})
             return JsonResponse(data={"status": "success", "msg": "券码上传成功"})
     upload_coupon.short_description = '上传券码'
     upload_coupon.type = "warning"
