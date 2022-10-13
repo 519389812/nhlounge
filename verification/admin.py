@@ -2,7 +2,9 @@ import io
 import os.path
 import re
 from django.contrib import admin
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.contrib import messages
 from verification.models import Coupon, CouponSummary
 from io import BytesIO
@@ -117,8 +119,9 @@ class CouponAdmin(AjaxAdmin):
                 except:
                     missed.append(r['券码'])
             if missed:
-                return JsonResponse(data={"status": "error", "msg": "序号: " + ','.join(missed) + ' 上传失败'})
-            return JsonResponse(data={"status": "success", "msg": "券码上传成功"})
+                self.message_user(request, "券码：%s 上传失败" % ','.join(missed), messages.INFO)
+                return JsonResponse(data={"status": "success", "msg": "券码上传完成，部分券码上传失败"})
+            return JsonResponse(data={"status": "success", "msg": "全部券码上传成功"})
     upload_coupon.short_description = '上传券码'
     upload_coupon.type = "warning"
     upload_coupon.layer = {

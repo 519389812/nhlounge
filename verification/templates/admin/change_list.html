@@ -1,0 +1,39 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block result_list %}
+    <div id="liveAlertPlaceholder"></div>
+    {% if messages %}
+        <script>
+            var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+            function alertMessage(message, type) {
+                if (type == "info"){
+                    type = 'danger'
+                }
+                var wrapper = document.createElement('div')
+                wrapper.innerHTML = '<div style="word-wrap: break-word; overflow-wrap: break-word;" class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '</div>'
+                alertPlaceholder.append(wrapper)
+            }
+
+            {% for msg in messages %}
+                alertMessage('{{ msg.message }}', '{{ msg.tags }}')
+                // window.setTimeout(function(){
+                //     $('.alert').empty().removeClass();
+                // }, 3000)
+            {% endfor %}
+        </script>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/sb-forms-0.4.1.js' %}"></script>
+{% endblock %}
