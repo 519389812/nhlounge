@@ -146,6 +146,8 @@ class CouponAdmin(AjaxAdmin):
                 return JsonResponse(data={"status": "error", "msg": "文件名称或格式错误"})
             if file.size > 2000:
                 return JsonResponse(data={"status": "error", "msg": "文件过大"})
+            if os.path.exists(os.path.join(BASE_DIR, KEY_DIR, file.name)):
+                return JsonResponse(data={"status": "error", "msg": "该版本的key已存在，不可再次上传"})
             try:
                 with open(os.path.join(BASE_DIR, KEY_DIR, file.name), 'wb') as f:
                     # for chunk in file.chunks():
