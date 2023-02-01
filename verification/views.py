@@ -58,17 +58,17 @@ def verify(request):
                 coupon.status = "已使用"
                 coupon.updated_user = request.user
                 coupon.save()
-                messages.success(request, '恭喜，兑换成功！')
+                messages.success(request, '核销成功！准入区域：%s' % coupon.coupon_type)
                 return redirect(reverse('verification:home'))
             else:
-                messages.error(request, "兑换失败！券码不可用，状态为：%s" % coupon.status)
+                messages.error(request, "核销失败！券码不可用，状态为：%s" % coupon.status)
                 return redirect(reverse('verification:home'))
         else:
             if dt < coupon.valid_from_datetime:
-                messages.error(request, "兑换失败！该券码未生效")
+                messages.error(request, "核销失败！该券码未生效")
                 return redirect(reverse('verification:home'))
             elif dt > coupon.expiry_datetime:
-                messages.error(request, "兑换失败！该券码已过期")
+                messages.error(request, "核销失败！该券码已过期")
                 return redirect(reverse('verification:home'))
     else:
         return render(request, "verification.html", {"msg_cn": "请求错误"})

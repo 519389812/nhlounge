@@ -38,7 +38,7 @@
                                 <!-- Submit Button-->
                                 <div id="liveAlertPlaceholder"></div>
                                 <div align="center" style="color: red">{{ msg_cn }}</div>
-                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">兑换</button></div>
+                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">核销</button></div>
                             </form>
                             <div align="center"><br/><p style="font-size: 12px">当前用户：{{ request.user.username }}, <a href="{% url 'verification:logout' %}">登出</a></p></div>
                         </div>
@@ -58,7 +58,11 @@
                 type = 'danger'
             }
             var wrapper = document.createElement('div')
-            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+            if (type == "success") {
+                wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert" style="font-size: 30px; text-align: center">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+            } else {
+                wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert" style="font-size: 24px; text-align: center">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+            }
             alertPlaceholder.append(wrapper)
         }
 
